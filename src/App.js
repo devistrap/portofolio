@@ -1,13 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      
-      
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 50
+    };
+  }
+
+  addOne = () => {
+    const { count } = this.state;
+    if (count === 100) {
+      console.info("max reached");
+    } else if (count < 100) {
+      this.setState({ count: count + 1 });
+    }
+  }
+
+  removeOne = () => {
+    const { count } = this.state;
+    if (count === 0) {
+      console.info("min reached");
+    } else if (count > 0) {
+      this.setState({ count: count - 1 });
+    }
+  }
+
+  render() {
+    const { count } = this.state;
+    return (
+      <div className="App">
+        <h1>progress bar</h1>
+        <input type='range' min="0" max="100" value={count} id='test'></input>
+        <button onClick={this.addOne}>add 1</button>
+        <button onClick={this.removeOne}>remove 1</button>
+        <p>{count}</p>
+      </div>
+    );
+  }
 }
 
 export default App;
